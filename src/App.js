@@ -1,14 +1,14 @@
 import './App.css';
 import './normal.css';
 import { useState } from 'react';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 function App() {
 
-  useEffect(() => {
-    getEngines();
-  }, [])
-  const [models, setModels] = useState([])
+  // useEffect(() => {
+  //   getEngines();
+  // }, [])
+  // const [models, setModels] = useState([])
   const [input, setInput] = useState('');
   const [chatLog, setChatLog] = useState([{
     user: "gpt",
@@ -20,11 +20,11 @@ function App() {
     setChatLog([]);
   }
 
-  function getEngines(){
-    fetch('http://localhost:3080/engines')
-    .then(res => res.json())
-    .then(data => setModels(data.models.data))
-  }
+  // function getEngines(){
+  //   fetch(`${process.env.SERVER}/engines`)
+  //   .then(res => res.json())
+  //   .then(data => setModels(data.models.data))
+  // }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -36,7 +36,7 @@ function App() {
     const messages = chatLogNew.map((message) => message.message).join('\n')
 
     // fetch request to API combining chatlog array of messages and sending it as a message to localhost:3080 as a post
-    const response = await fetch("http://localhost:3080", {
+    const response = await fetch('https://server-openai-bot.onrender.com', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
