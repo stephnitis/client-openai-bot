@@ -1,10 +1,15 @@
 import './App.css';
 import './normal.css';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 function App() {
 
-  const [input, setInput] = useState("");
+  useEffect(() => {
+    getEngines();
+  }, [])
+  const [models, setModels] = useState([])
+  const [input, setInput] = useState('');
   const [chatLog, setChatLog] = useState([{
     user: "gpt",
     message: "How can I help you today?"
@@ -13,6 +18,12 @@ function App() {
 
   function clearChat() {
     setChatLog([]);
+  }
+
+  function getEngines(){
+    fetch('http://localhost:3080/engines')
+    .then(res => res.json())
+    .then(data => setModels(data.models.data))
   }
 
   async function handleSubmit(e) {
