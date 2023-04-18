@@ -36,7 +36,7 @@ function App() {
     const messages = chatLogNew.map((message) => message.message).join('\n')
 
     // fetch request to API combining chatlog array of messages and sending it as a message to localhost:3080 as a post
-    const response = await fetch('https://server-openai-bot.onrender.com', {
+    const response = await fetch('http://localhost:3080', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
